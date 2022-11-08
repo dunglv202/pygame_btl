@@ -28,7 +28,7 @@ class SpaceShooting:
             bound=pygame.Rect(0, 0, self.screen.get_width(),
                               self.screen.get_height()/2),
             controls={'up': K_w, 'down': K_s, 'left': K_a,
-                      'right': K_d, 'fire': K_LSHIFT}
+                      'right': K_d, 'fire': K_BACKQUOTE}
         )
         self.red_craft = Craft(
             image='craft_red.png',

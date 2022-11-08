@@ -25,7 +25,7 @@ class Item(pygame.sprite.Sprite):
         elif self.direction == Direction.TO_TOP:
             self.rect.top -= self.speed
         elif self.direction == Direction.TO_BOTTOM:
-            self.rect.top -= self.speed
+            self.rect.top += self.speed
 
         # check if out of range
         if not pygame.display.get_surface().get_rect().contains(self.rect):
