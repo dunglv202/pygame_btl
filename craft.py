@@ -1,6 +1,6 @@
 from os import path
 import pygame
-from constant import WINDOW_HEIGHT, WINDOW_WIDTH
+from constant import MAX_CONCURRENT_BULLET, WINDOW_HEIGHT, WINDOW_WIDTH
 from direction import Direction
 from pygame import Rect
 from bullet import Bullet
@@ -37,7 +37,7 @@ class Craft(pygame.sprite.Sprite):
 
     def fire(self, bullet_group: pygame.sprite.Group):
         print("Fired!")
-        if self.alive() and len(self.bullets) < 5:
+        if self.alive() and len(self.bullets) < MAX_CONCURRENT_BULLET:
             new_bullet = Bullet(self.direction, self.rect.center)
             self.bullets.append(new_bullet)
             bullet_group.add(new_bullet)

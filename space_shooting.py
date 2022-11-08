@@ -21,13 +21,13 @@ class SpaceShooting:
             image='craft_blue.png', 
             direction=Direction.TO_RIGHT,
             bound=pygame.Rect(0, 0, width/2, height),
-            controls={'up': K_UP, 'down': K_DOWN, 'left': K_LEFT, 'right': K_RIGHT, 'fire': K_RETURN}
+            controls={'up': K_w, 'down': K_s, 'left': K_a, 'right': K_d, 'fire': K_LSHIFT}
         )
         self.red_craft = Craft(
             image='craft_red.png',
             direction=Direction.TO_LEFT,
             bound=pygame.Rect(width/2, 0, width/2, height),
-            controls={'up': K_w, 'down': K_s, 'left': K_a, 'right': K_d, 'fire': K_LSHIFT}
+            controls={'up': K_UP, 'down': K_DOWN, 'left': K_LEFT, 'right': K_RIGHT, 'fire': K_RETURN}
         )
         self.craft_group = pygame.sprite.Group()
         self.craft_group.add(self.blue_craft)
