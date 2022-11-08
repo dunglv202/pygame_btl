@@ -5,6 +5,7 @@ from direction import Direction
 from pygame import Rect
 from bullet import Bullet
 
+
 class Craft(pygame.sprite.Sprite):
     def __init__(self, image: str, direction: Direction, bound: Rect, controls: dict):
         super().__init__()
@@ -18,12 +19,13 @@ class Craft(pygame.sprite.Sprite):
         self.direction = direction
         self.bound = bound
 
-        self.image = pygame.transform.rotate(pygame.transform.scale(pygame.image.load(path.join('graphics', image)), (120, 120)), (90 if direction == Direction.TO_LEFT else -90)).convert_alpha()
+        self.image = pygame.transform.rotate(pygame.transform.scale(pygame.image.load(path.join(
+            'graphics', image)), (120, 120)), (0 if direction == Direction.TO_TOP else 180)).convert_alpha()
         self.rect = self.image.get_rect()
-        if direction == Direction.TO_LEFT:
-            self.rect.midright = bound.midright
+        if direction == Direction.TO_TOP:
+            self.rect.midbottom = bound.midbottom
         else:
-            self.rect.midleft = bound.midleft
+            self.rect.midtop = bound.midtop
 
     def handle_user_input(self, key_pressed):
         if key_pressed[self.controls['up']] and self.rect.top - self.moving_speed > self.bound.top:
@@ -34,6 +36,10 @@ class Craft(pygame.sprite.Sprite):
             self.rect.left -= self.moving_speed
         if key_pressed[self.controls['right']] and self.rect.right + self.moving_speed < self.bound.right:
             self.rect.left += self.moving_speed
+
+    def reverse_controls(self):
+        self.controls['up'], self.controls['down'] = self.controls['down'], self.controls['up']
+        self.controls['left'], self.controls['right'] = self.controls['right'], self.controls['left']
 
     def fire(self, bullet_group: pygame.sprite.Group):
         print("Fired!")

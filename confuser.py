@@ -1,24 +1,19 @@
 import pygame
-from craft import Craft
-from item import ExpirableItem
 from os import path
+from item import ExpirableItem
 from threading import Timer
 
 
-class Shield(ExpirableItem):
+class Confuser(ExpirableItem):
     def __init__(self):
-        super().__init__(3)
+        super().__init__(1)
         self.image = pygame.transform.scale(pygame.image.load(
             path.join('graphics', 'craft_red.png')), (30, 30))
         self.rect = self.image.get_rect()
 
-    def apply(self, craft: Craft):
+    def apply(self, craft):
         super().apply(craft)
-        craft.has_shield = True
-        print('Get shield -> health: ', craft.heath)
+        craft.reverse_controls()
 
     def unapply(self, craft):
-        craft.has_shield = False
-
-    def kill(self) -> None:
-        super().kill()
+        craft.reverse_controls()

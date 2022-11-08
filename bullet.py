@@ -3,6 +3,7 @@ from constant import *
 from direction import Direction
 from item import Item
 
+
 class Bullet(Item):
     def __init__(self, direction: Direction, coord: list):
         super().__init__()
@@ -13,14 +14,9 @@ class Bullet(Item):
 
         self.image = pygame.Surface((20, 5)).convert_alpha()
         self.image.fill("Red")
-        self.rect = self.image.get_rect(center = coord)
+        self.rect = self.image.get_rect(center=coord)
 
     def apply(self, craft):
         if not self in craft.bullets:
             super().apply(craft)
             craft.hit(self)
-
-    def update(self):
-        super().update()
-        # update position
-        self.rect.left += self.speed * (-1 if self.direction == Direction.TO_LEFT else 1)
