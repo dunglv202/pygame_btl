@@ -9,7 +9,7 @@ class Shield(ExpirableItem):
     def __init__(self):
         super().__init__(3)
         self.image = pygame.transform.scale(pygame.image.load(
-            path.join('graphics', 'craft_red.png')), (30, 30))
+            path.join('graphics', 'shield.png')), (30, 30))
         self.rect = self.image.get_rect()
 
     def apply(self, craft: Craft):

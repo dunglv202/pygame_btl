@@ -7,7 +7,7 @@ class Booster(ExpirableItem):
     def __init__(self):
         super().__init__(5)
         self.image = pygame.transform.scale(pygame.image.load(
-            path.join('graphics', 'craft_red.png')), (30, 30))
+            path.join('graphics', 'item.png')), (30, 30))
         self.rect = self.image.get_rect()
 
     def apply(self, craft):

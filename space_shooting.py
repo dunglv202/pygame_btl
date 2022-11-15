@@ -6,6 +6,7 @@ from craft import Craft
 from direction import Direction
 from booster import Booster
 from shield import Shield
+from obstacle import Obstacle
 from gui.menu import SimpleMenu
 from gui.button import Button
 import random
@@ -50,7 +51,7 @@ class SpaceShooting:
         # item group
         self.item_group = pygame.sprite.Group()
         # available item list
-        self.available_items = [Shield, Booster, Confuser]
+        self.available_items = [Obstacle, Shield, Booster, Confuser]
 
     def run(self):
         while True:
@@ -64,9 +65,9 @@ class SpaceShooting:
 
     def __init_main_menu__(self):
         self.main_menu = SimpleMenu(self.screen.get_width(), self.screen.get_height(), 10)
-        start_game_btn = Button('button.png', 300, 100)
+        start_game_btn = Button('btn_new_game.png', 238, 50)
         start_game_btn.set_onclick(self.loop_game)
-        quit_game_btn = Button('button.png', 300, 100)
+        quit_game_btn = Button('btn_exit.png', 238, 50)
         quit_game_btn.set_onclick(self.quit_game)
         self.main_menu.add_button(start_game_btn)
         self.main_menu.add_button(quit_game_btn)
@@ -102,7 +103,7 @@ class SpaceShooting:
             self.screen.blit(self.background, (0, 0))
 
             # add item
-            if random.randint(0, 1000) > 990:
+            if random.randint(0, 1000) > 980:
                 item = random.choice(self.available_items)()
                 item.rect.top = random.randint(0, self.screen.get_height())
                 self.item_group.add(item)

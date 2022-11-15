@@ -4,9 +4,9 @@ from gui.button import Button
 class SimpleMenu(Surface):
     def __init__(self, width: int, height: int, button_spacing: int):
         super().__init__((width, height))
-        self.fill("ORANGE")
+        self.fill("BLACK")
         self.button_spacing = button_spacing
-        self.bottom = 0
+        self.bottom = 200
         self.button_list = list()
 
     def add_button(self, button: Button):
