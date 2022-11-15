@@ -6,6 +6,8 @@ from craft import Craft
 from direction import Direction
 from booster import Booster
 from shield import Shield
+from gui.menu import SimpleMenu
+from gui.button import Button
 import random
 
 
@@ -21,6 +23,8 @@ class SpaceShooting:
         # init background
         self.background = pygame.transform.scale(pygame.image.load(
             'graphics/space.png'), (self.screen.get_width(), self.screen.get_height())).convert_alpha()
+        # init menu
+        self.__init_main_menu__()
         # add crafts
         self.blue_craft = Craft(
             image='craft_blue.png',
@@ -48,15 +52,33 @@ class SpaceShooting:
         # available item list
         self.available_items = [Shield, Booster, Confuser]
 
+    def run(self):
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    self.quit_game()
+                if event.type == MOUSEBUTTONDOWN:
+                    self.main_menu.handle_click(pygame.mouse.get_pos())
+            self.show_main_menu()
+            pygame.display.update()
+
+    def __init_main_menu__(self):
+        self.main_menu = SimpleMenu(self.screen.get_width(), self.screen.get_height(), 10)
+        start_game_btn = Button('button.png', 300, 100)
+        start_game_btn.set_onclick(self.loop_game)
+        quit_game_btn = Button('button.png', 300, 100)
+        quit_game_btn.set_onclick(self.quit_game)
+        self.main_menu.add_button(start_game_btn)
+        self.main_menu.add_button(quit_game_btn)
+
     def show_main_menu(self):
-        pass
+        self.screen.blit(self.main_menu, (0, 0))
 
     def loop_game(self):
         while True:
             for event in pygame.event.get():
                 if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
+                    self.quit_game()
                 if event.type == KEYDOWN:
                     key_pressed = pygame.key.get_pressed()
 
@@ -106,6 +128,11 @@ class SpaceShooting:
 
     def pause_game(self):
         self.paused = not self.paused
+
+    def quit_game(self):
+        print("Exited")
+        pygame.quit()
+        sys.exit()
 
     def __update__(self):
         # self.bullet_group.draw(self.screen)
